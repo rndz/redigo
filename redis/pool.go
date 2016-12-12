@@ -432,7 +432,6 @@ func (sap *SentinelAwarePool) testConn(c Conn) error {
 	err := c.Err()
 	if err != nil {
 		return err
-		i
 	}
 	return sap.TestOnReturn(c)
 }
