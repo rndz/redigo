@@ -14,7 +14,7 @@
 
 // Package redis is a client for the Redis database.
 //
-// The Redigo FAQ (https://github.com/garyburd/redigo/wiki/FAQ) contains more
+// The Redigo FAQ (https://github.com/rndz/redigo/wiki/FAQ) contains more
 // documentation about this package.
 //
 // Connections
@@ -99,15 +99,14 @@
 //
 // Concurrency
 //
-// Connections do not support concurrent calls to the write methods (Send,
-// Flush) or concurrent calls to the read method (Receive). Connections do
-// allow a concurrent reader and writer.
+// Connections support one concurrent caller to the Receive method and one
+// concurrent caller to the Send and Flush methods. No other concurrency is
+// supported including concurrent calls to the Do method.
 //
-// Because the Do method combines the functionality of Send, Flush and Receive,
-// the Do method cannot be called concurrently with the other methods.
-//
-// For full concurrent access to Redis, use the thread-safe Pool to get and
-// release connections from within a goroutine.
+// For full concurrent access to Redis, use the thread-safe Pool to get, use
+// and release a connection from within a goroutine. Connections returned from
+// a Pool have the concurrency restrictions described in the previous
+// paragraph.
 //
 // Publish and Subscribe
 //
@@ -166,4 +165,4 @@
 //   if _, err := redis.Scan(reply, &value1, &value2); err != nil {
 //      // handle error
 //  }
-package redis // import "github.com/garyburd/redigo/redis"
+package redis // import "github.com/rndz/redigo/redis"
